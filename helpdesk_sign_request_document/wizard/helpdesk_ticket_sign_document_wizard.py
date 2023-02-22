@@ -89,14 +89,12 @@ class HelpdeskSignDocumentWizard(models.TransientModel):
 
         self.ticket_id.message_post(
             body=_(
-                '''"%(user)s requested a new signature on document: %(template)s.
-                <br/>%(employee)s and %(partner)s are the signatories."'''
-            )
-            % (
-                self.env.user.display_name,
-                self.sign_template_id.name,
-                self.employee_id.display_name,
-                self.partner_id.display_name,
+                "%(user)s requested a new signature on document: %(template)s."
+                "<br/>%(employee)s and %(partner)s are the signatories.",
+                user=self.env.user.display_name,
+                template=self.sign_template_id.name,
+                employee=self.employee_id.display_name,
+                partner=self.partner_id.display_name,
             )
         )
 
