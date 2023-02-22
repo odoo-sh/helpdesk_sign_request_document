@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Sodexis
+     License OPL-1 (See LICENSE file for full copyright and licensing details). -->
+<odoo>
+    <record id="helpdesk_ticket_view_form_inherit_sign" model="ir.ui.view">
+        <field name='name'>helpdesk.ticket.form.inherit.sale</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="%(sign_helpdesk_wizard_action)d"
+                    string="Signature Request"
+                    type="action"
+                    groups="sign.group_sign_user"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="open_helpdesk_sign_requests"
+                    type="object"
+                    groups="sign.group_sign_user"
+                    class="oe_stat_button"
+                    icon="fa-pencil"
+                    attrs="{'invisible': [('sign_request_count', '=', 0)]}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field
+                                name="sign_request_count"
+                            /></span>
+                        <span class="o_stat_text">Signature Requests</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

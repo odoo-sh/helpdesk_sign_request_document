@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_helpdesk_document_sign" model="ir.ui.view">
+        <field name="name">helpdesk_document_sign</field>
+        <field name="model">helpdesk.ticket.sign.document.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Signature Request">
+                <group class="o_label_nowrap">
+                    <field name="ticket_id" invisible="1" />
+                    <field
+                        name="sign_template_id"
+                        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        kanban_view_ref="%(sign.sign_template_view_kanban_mobile)s"
+                    />
+                </group>
+                <group attrs="{'invisible': [('sign_template_id', '=', False)]}">
+                    <group>
+                        <field
+                            name="employee_id"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                        <field
+                            name="partner_id"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                    </group>
+                </group>
+                <group class="o_label_nowrap">
+                    <field name="subject" placeholder="Signature Request" />
+                    <field name="message" placeholder="Optional Message..." />
+                </group>
+                <footer>
+                    <button
+                        name="validate_helpdesk_signature"
+                        string="Send"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Discard" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="sign_helpdesk_wizard_action" model="ir.actions.act_window">
+        <field name="name">Document Signature</field>
+        <field name="res_model">helpdesk.ticket.sign.document.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
