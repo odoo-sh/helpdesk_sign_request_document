@@ -9,7 +9,10 @@ from odoo.exceptions import ValidationError
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
 
-    sign_request_ids = fields.Many2many("sign.request", string="Requested Signatures")
+    sign_request_ids = fields.Many2many(
+        "sign.request",
+        string="Requested Signatures"
+    )
     sign_request_count = fields.Integer(compute="_compute_sign_request_count")
 
     @api.depends("sign_request_ids")

@@ -27,10 +27,14 @@ class HelpdeskSignDocumentWizard(models.TransientModel):
         string="ticket",
         default=lambda self: self.env.context.get("active_id"),
     )
-    employee_id = fields.Many2one("hr.employee", string="Employee", required="1")
+    employee_id = fields.Many2one(
+        "hr.employee",
+        string="Employee",
+        required=True,
+    )
     partner_id = fields.Many2one(
         "res.partner",
-        required="1",
+        required=True,
         string="Customer",
         domain="[('is_company','=',False),('email','!=',False)]",
     )
